@@ -54,11 +54,11 @@ export async function scrapeAmazonProduct(url: string) {
 
     const imageUrls = Object.keys(JSON.parse(images));
 
-    const discountRate = $('.savingsPercentage').text().replace(/[-%]/g, "");
+    const discountRate = $('.savingsPercentage').first().text().replace(/[-%]/g, "");
 
     const currency = extractCurrency($('.a-price-symbol'))
 
-    const stars = $('#acrPopover span a span.a-size-base.a-color-base').text().trim() || '0';
+    const stars = $('#acrPopover span a span.a-size-base.a-color-base').first().text().trim() || '0';
 
     const reviewsCount = $('#acrCustomerReviewText').first().text().replace(/\D/g, '') || '0';
 
@@ -83,7 +83,7 @@ export async function scrapeAmazonProduct(url: string) {
       highestPrice : Number(originalPrice) || Number(currentPrice),
       average: Number(currentPrice) || Number(originalPrice),
     }
-
+    
     return data;
     // console.log(data);
   } catch (error: any) {
